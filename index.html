@@ -3,285 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holiday Bees | Premium Travel Experiences</title>
+    <title>Holiday Bees | Your Dream Destinations</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for Social Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- CSS Libraries for Premium Effects (Swiper Slider & AOS Animations) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         /* --- BASE STYLES --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; overflow-x: hidden; }
-        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: #14213d; background-color: #f8f9fa; overflow-x: hidden;}
-        a { text-decoration: none; transition: all 0.3s ease; }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: #14213d; background-color: #f8f9fa; }
+        a { text-decoration: none; transition: color 0.3s ease; }
         :root {
-            --primary: #fca311; /* Gold */
-            --primary-dark: #e89610;
-            --dark: #0a111f; /* Deep Blue */
+            --primary: #fca311; 
+            --dark: #14213d;
             --light: #ffffff;
             --accent-blue: #005f73;
             --whatsapp-green: #25D366;
         }
 
-        .text-gradient {
-            background: linear-gradient(to right, var(--primary), #ffd700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
-
-        /* Glassmorphism Navigation */
+        /* Navigation */
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            /* Reduced padding for sleeker look */
-            padding: 0.5rem 5%; position: fixed; width: 100%; top: 0; z-index: 100;
-            background: rgba(10, 17, 31, 0.85);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.4s ease;
-            height: 80px; /* Fixed height to ensure alignment */
+            padding: 1.5rem 5%; position: absolute; width: 100%; top: 0; z-index: 10;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
         }
-        nav.scrolled { background: rgba(10, 17, 31, 0.98); }
+        .logo { font-size: 2rem; font-weight: 700; color: var(--primary); text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
+        .logo span { color: var(--light); }
+        .nav-contact-btn { background-color: var(--primary); color: var(--dark); padding: 10px 25px; font-weight: 600; border-radius: 30px; transition: transform 0.3s ease; }
+        .nav-contact-btn:hover { transform: scale(1.05); background-color: #e89610; }
 
-        /* --- LOGO STYLES --- */
-        .logo-container {
-            display: flex;
-            align-items: center;
-            height: 100%;
-            max-width: 180px;
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            animation: slideDownFade 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(20, 33, 61, 0.3), rgba(20, 33, 61, 0.3)), url('hero-banner.jpg');
+            background-color: #333; background-size: cover; background-position: center;
+            height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; color: var(--light); padding: 0 20px;
         }
+        .hero h1 { font-size: 4rem; line-height: 1.2; margin-bottom: 1.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .hero h1 span { color: var(--primary); }
+        .hero p { font-size: 1.4rem; max-width: 700px; margin-bottom: 2.5rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); font-weight: 600;}
+        .main-btn { padding: 15px 40px; background-color: var(--primary); color: var(--dark); font-size: 1.1rem; font-weight: 700; border-radius: 50px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(252, 163, 17, 0.4); }
+        .main-btn:hover { background-color: var(--light); color: var(--primary); }
 
-        .main-logo {
-            max-height: 60px; /* Ensure logo doesn't overflow nav height */
-            width: auto;
-            display: block;
-            /* Fallback style if image is missing */
-            font-weight: 800; color: var(--primary); font-size: 1.5rem;
-        }
-
-        @keyframes slideDownFade {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .logo-container::after {
-            content: ''; position: absolute; top: -50%; left: -60%; width: 20%; height: 200%; opacity: 0; transform: rotate(30deg);
-            background: linear-gradient(to right, rgba(255, 255, 255, 0.0) 0%, rgba(255, 255, 255, 0.6) 77%, rgba(255, 255, 255, 0.8) 92%, rgba(255, 255, 255, 0.0) 100%);
-            transition: opacity 0.3s;
-        }
-        .logo-container:hover::after { opacity: 1; animation: shineSlide 1.8s ease-in-out infinite; }
-        @keyframes shineSlide { from { left: -60%; } to { left: 120%; } }
-
-        .nav-contact-btn { background: linear-gradient(45deg, var(--primary), var(--primary-dark)); color: var(--dark); padding: 10px 30px; font-weight: 700; border-radius: 30px; box-shadow: 0 4px 15px rgba(252, 163, 17, 0.3); }
-        .nav-contact-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(252, 163, 17, 0.5); color: white;}
-
-        /* --- HERO SLIDER SECTION (Swiper.js) --- */
-        /* Changed height from 100vh to a fixed height for better mobile consistency */
-        .hero-slider { height: 90vh; min-height: 600px; width: 100%; position: relative; }
-        .swiper-slide {
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; color: var(--light); 
-            /* Added top padding so content clears the navbar */
-            padding: 100px 20px 0 20px;
-            background-size: cover; background-position: center;
-        }
-        .slide-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(10, 17, 31, 0.4), rgba(10, 17, 31, 0.6)); /* Lighter overlay */
-            z-index: 1;
-        }
-        /* Removed margin-top here as we use padding on the slide now */
-        .hero-content { position: relative; z-index: 2; max-width: 900px; }
-        
-        .hero h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; font-weight: 800; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
-        .hero p { font-size: 1.3rem; font-weight: 300; margin-bottom: 2.5rem; letter-spacing: 1px; rgba(255,255,255,0.9); }
-        
-        .main-btn {
-            padding: 18px 45px; background: linear-gradient(45deg, var(--primary), var(--primary-dark));
-            color: var(--dark); font-size: 1rem; font-weight: 700; border-radius: 50px;
-            letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 5px 20px rgba(252, 163, 17, 0.4);
-        }
-        .main-btn:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(252, 163, 17, 0.6); color: white; }
-
-        .swiper-button-next, .swiper-button-prev { color: var(--primary) !important; }
-        .swiper-pagination-bullet-active { background: var(--primary) !important; }
-
-
-        /* --- SECTIONS SPACING FIX --- */
-        /* Reduced padding significantly to remove empty space */
-        section { padding: 4rem 5%; }
-        .section-title { font-size: 2.8rem; margin-bottom: 1rem; color: var(--dark); text-align: center; font-weight: 700; }
-        .section-subtitle { text-align: center; margin-bottom: 3rem; color: #666; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;}
-
-        /* Tours Cards */
-        .tours-section { background: white; }
-        .tour-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        /* Tours Section */
+        .tours-section { padding: 5rem 5%; background: white; }
+        .section-title { font-size: 2.5rem; margin-bottom: 1rem; color: var(--dark); text-align: center; }
+        .section-subtitle { text-align: center; margin-bottom: 3rem; color: #666; }
+        .tour-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
         .tour-card-link { color: inherit; display: block; height: 100%; }
-        .tour-card {
-            background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.05); transition: all 0.4s ease; height: 100%; display: flex; flex-direction: column;
-        }
-        .tour-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
-        .tour-img-wrap { overflow: hidden; height: 250px; }
-        .tour-img { height: 100%; width: 100%; object-fit: cover; transition: transform 0.5s ease; }
-        .tour-card:hover .tour-img { transform: scale(1.05); }
-        .tour-content { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; }
-        .tour-meta { color: var(--primary); font-weight: 700; letter-spacing: 1px; font-size: 0.9rem; margin-bottom: 15px; display: block; text-transform: uppercase;}
-        .tour-card h3 { font-size: 1.5rem; margin-bottom: 1.5rem; line-height: 1.3; }
-        .tour-facilities li { font-size: 1rem; color: #555; margin-bottom: 10px; padding-left: 25px; position: relative; }
-        .tour-facilities li::before { content: '✦'; color: var(--primary); position: absolute; left: 0; top: 2px; }
+        .tour-card { background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%; display: flex; flex-direction: column; }
+        .tour-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.12); }
+        .tour-img { height: 250px; width: 100%; object-fit: cover; }
+        .tour-content { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;}
+        .tour-meta { color: var(--accent-blue); font-weight: 600; font-size: 0.9rem; margin-bottom: 10px; display: block;}
+        .tour-card h3 { font-size: 1.4rem; margin-bottom: 1.5rem; line-height: 1.3; }
+        .tour-facilities { list-style: none; margin-top: auto; }
+        .tour-facilities li { font-size: 0.95rem; color: #555; margin-bottom: 8px; padding-left: 25px; position: relative; }
+        .tour-facilities li::before { content: '•'; color: var(--primary); font-size: 1.5rem; position: absolute; left: 0; top: -5px; }
 
-        /* --- MID-BANNER PARALLAX SECTION --- */
-        .parallax-banner {
-            background-image: linear-gradient(rgba(10, 17, 31, 0.6), rgba(10, 17, 31, 0.6)), url('gallery2.jpg');
-            background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover;
-            padding: 8rem 5%; text-align: center; color: white; /* Reduced padding here too */
-        }
-        .parallax-banner h2 { font-size: 3rem; margin-bottom: 1.5rem;}
-
-
-        /* Gallery */
-        .gallery-section { text-align: center; background: #f4f4f4; }
+        /* Gallery Section */
+        .gallery-section { padding: 5rem 5%; text-align: center; background: #f4f4f4; }
         .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
-        .grid-item { height: 250px; border-radius: 15px; overflow: hidden; position: relative; box-shadow: 0 10px 20px rgba(0,0,0,0.08); cursor: pointer;}
-        .grid-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); }
-        .grid-item::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(10, 17, 31, 0.8), transparent); opacity: 0; transition: opacity 0.4s ease; }
-        .grid-item:hover img { transform: scale(1.15); }
-        .grid-item:hover::after { opacity: 1; }
+        .grid-item { height: 250px; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .grid-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .grid-item:hover img { transform: scale(1.1); }
 
-        /* Contact Section & Form */
-        .contact-section { background-color: var(--dark); color: var(--light); position: relative; overflow: hidden;}
-        .contact-section::before { content: ''; position: absolute; top:0; left:0; width: 100%; height: 100%; opacity: 0.05; background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); pointer-events: none;}
-        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1100px; margin: 0 auto; position: relative; z-index: 2;}
-        .contact-info h2 { color: var(--light); margin-bottom: 1rem; font-size: 2.8rem; }
-        .contact-details { margin-top: 2rem; }
+        /* --- REDESIGNED CONTACT SECTION --- */
+        .contact-section { padding: 5rem 5%; background-color: var(--dark); color: var(--light); }
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1100px; margin: 0 auto; }
+        
+        /* Contact Left Side (Details) */
+        .contact-info h2 { color: var(--primary); margin-bottom: 1.5rem; font-size: 2.5rem; }
+        .contact-details { font-size: 1.1rem; margin-top: 2rem; }
         .contact-item { margin-bottom: 1.5rem; display: flex; align-items: center; }
-        .icon-box { display: flex; justify-content: center; align-items: center; width: 50px; height: 50px; background: rgba(252, 163, 17, 0.1); color: var(--primary); border-radius: 50%; margin-right: 20px; font-size: 1.3rem;}
-        .contact-item a { color: rgba(255,255,255,0.8); font-size: 1rem;}
+        .contact-item i { color: var(--primary); font-size: 1.5rem; margin-right: 15px; width: 30px; text-align: center;}
+        .contact-item a { color: var(--light); }
         .contact-item a:hover { color: var(--primary); }
 
-        .contact-form-box { background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); padding: 2.5rem; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1); }
-        .form-input { width: 100%; padding: 12px 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); border-radius: 10px; font-family: inherit; font-size: 1rem; color: white; margin-bottom: 1rem; transition: border 0.3s;}
-        .form-input:focus { outline: none; border-color: var(--primary); }
-        .form-input::placeholder { color: rgba(255,255,255,0.4); }
+        /* Contact Right Side (Form) */
+        .contact-form-box { background: white; padding: 3rem; border-radius: 15px; color: var(--dark); }
+        .contact-form-box h3 { margin-bottom: 1.5rem; color: var(--accent-blue); }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-input { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 1rem; }
         textarea.form-input { resize: vertical; height: 120px; }
-        .form-submit { width: 100%; padding: 15px; background: linear-gradient(45deg, var(--primary), var(--primary-dark)); color: var(--dark); border: none; border-radius: 10px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; letter-spacing: 1px;}
-        .form-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(252, 163, 17, 0.4); color: white; }
+        .form-submit { width: 100%; padding: 12px; background-color: var(--primary); color: var(--dark); border: none; border-radius: 5px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: background 0.3s ease; }
+        .form-submit:hover { background-color: #e89610; }
 
         /* Footer & Social */
-        footer { background: #050911; color: rgba(255,255,255,0.5); text-align: center; padding: 3rem 2rem; }
+        footer { background: #0a111f; color: rgba(255,255,255,0.6); text-align: center; padding: 3rem 2rem; }
         .footer-social { margin-bottom: 1.5rem; }
-        .social-icon { display: inline-flex; justify-content: center; align-items: center; width: 50px; height: 50px; background: rgba(255,255,255,0.05); color: var(--light); border-radius: 50%; margin: 0 10px; font-size: 1.3rem; transition: all 0.3s ease; }
-        .social-icon:hover { background: var(--primary); color: var(--dark); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(252, 163, 17, 0.3); }
-        .social-icon.wa-footer:hover { background: var(--whatsapp-green); color: white; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
+        .social-icon { display: inline-flex; justify-content: center; align-items: center; width: 50px; height: 50px; background: rgba(255,255,255,0.1); color: var(--light); border-radius: 50%; margin: 0 10px; font-size: 1.5rem; transition: all 0.3s ease; }
+        .social-icon:hover { background: var(--primary); color: var(--dark); transform: translateY(-5px); }
+        .social-icon.wa-footer:hover { background: var(--whatsapp-green); color: white; }
 
-        /* Floating WhatsApp */
-        .floating-wa { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(45deg, #25D366, #128C7E); color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 32px; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5); z-index: 100; transition: all 0.3s ease; }
-        .floating-wa:hover { transform: scale(1.1) rotate(10deg); }
+        /* Floating WhatsApp Button */
+        .floating-wa { position: fixed; bottom: 30px; right: 30px; background-color: var(--whatsapp-green); color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 35px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 100; transition: transform 0.3s ease; }
+        .floating-wa:hover { transform: scale(1.1); }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.8rem; }
-            .logo-container { max-width: 140px; }
-            .nav-contact-btn { display: none; }
-            .contact-wrapper { grid-template-columns: 1fr; gap: 3rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .logo { font-size: 1.5rem; }
+            .nav-contact-btn { display: none; } /* Hide top contact btn on mobile */
+            .contact-wrapper { grid-template-columns: 1fr; gap: 2rem; }
             .contact-form-box { padding: 2rem; }
-            .floating-wa { bottom: 20px; right: 20px; width: 55px; height: 55px; font-size: 28px; }
-            .parallax-banner { background-attachment: scroll; padding: 5rem 5%; }
-            section { padding: 4rem 5%; }
+            .floating-wa { bottom: 20px; right: 20px; width: 55px; height: 55px; font-size: 30px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Glassmorphism Navigation with PREMIUM LOGO -->
-    <nav id="navbar">
-        <a href="#" class="logo-container">
-            <!-- Make sure your image is named exactly logo.png and is in the folder -->
-            <!-- Added an onerror fallback just in case -->
-            <img src="logo.png" alt="Holiday Bees" class="main-logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<h2 style=\'color:#fca311; font-weight:800;\'>HolidayBees</h2>'">
-        </a>
-        <a href="#contact" class="nav-contact-btn">Plan My Trip</a>
+    <nav>
+        <div class="logo">Holiday<span>Bees</span>.in</div>
+        <a href="#contact" class="nav-contact-btn">Contact Us</a>
     </nav>
 
-    <!-- PREMIUM HERO SLIDER SECTION -->
-    <div class="hero-slider">
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide" style="background-image: url('hero-banner.jpg');">
-                    <div class="slide-overlay"></div>
-                    <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-                        <h1>Your Gateway to<br><span class="text-gradient">Exotic Getaways</span></h1>
-                        <p>Sister concern of Sri Lanka's premier DMC. Bringing world-class expertise to your dream holidays.</p>
-                        <a href="#packages" class="main-btn">Explore Experiences</a>
-                    </div>
-                </div>
-                 <div class="swiper-slide" style="background-image: url('gallery2.jpg');">
-                    <div class="slide-overlay"></div>
-                    <div class="hero-content">
-                        <h1>Immerse Yourself in<br><span class="text-gradient">Ancient Culture</span></h1>
-                        <p>Discover timeless heritage and sacred sites curated just for you.</p>
-                        <a href="#packages" class="main-btn">View Cultural Tours</a>
-                    </div>
-                </div>
-                 <div class="swiper-slide" style="background-image: url('gallery3.jpg');">
-                    <div class="slide-overlay"></div>
-                    <div class="hero-content">
-                        <h1>Breathtaking<br><span class="text-gradient">Natural Wonders</span></h1>
-                        <p>From lush tea plantations to pristine beaches, experience nature at its finest.</p>
-                        <a href="#packages" class="main-btn">See Nature Packages</a>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-        </div>
-    </div>
+    <section class="hero">
+        <h1>Your Gateway to<br><span>Exotic Getaways</span></h1>
+        <p>Sister concern of Sri Lanka's premier DMC. Bringing expertise to your dream holidays.</p>
+        <a href="#packages" class="main-btn">View Packages</a>
+    </section>
 
-    <!-- Tours Section -->
     <section id="packages" class="tours-section">
-        <h2 class="section-title" data-aos="fade-up">Featured Sri Lanka Experiences</h2>
-        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Handpicked itineraries for an unforgettable journey, crafted with precision and care.</p>
+        <h2 class="section-title">Featured Sri Lanka Experiences</h2>
+        <p class="section-subtitle">Handpicked itineraries for an unforgettable journey.</p>
         
         <div class="tour-grid">
             <!-- CARD 1 -->
-            <a href="ramayana-trail.html" class="tour-card-link" data-aos="fade-up" data-aos-delay="200">
+            <a href="ramayana-trail.html" class="tour-card-link">
                 <div class="tour-card">
-                    <div class="tour-img-wrap">
-                         <img src="Scenic.png" alt="Sri Lanka Culture" class="tour-img">
-                    </div>
+                    <img src="Scenic.png" alt="Sri Lanka Culture" class="tour-img">
                     <div class="tour-content">
                         <span class="tour-meta">7 Days, 6 Nights</span>
-                        <h3>Cultural Heritage: Ramayana Trail</h3>
+                        <h3>Cultural Heritage of Sri Lanka: Ramayana Trail</h3>
                         <ul class="tour-facilities">
-                            <li>4-Star Luxury Accommodation</li>
-                            <li>Daily Gourmet Breakfast & Dinner</li>
-                            <li>Private English-Speaking Chauffeur</li>
+                            <li>4-Star Accommodation</li>
+                            <li>Daily Breakfast and Dinner</li>
+                            <li>Complimentary 5GB Data SIM</li>
+                            <li>English-Speaking Guide</li>
                         </ul>
                     </div>
                 </div>
             </a>
             <!-- CARD 2 -->
-            <a href="nature-wonders.html" class="tour-card-link" data-aos="fade-up" data-aos-delay="300">
+            <a href="nature-wonders.html" class="tour-card-link">
                 <div class="tour-card">
-                     <div class="tour-img-wrap">
-                        <img src="kandy.png" alt="Kandy Elephants" class="tour-img">
-                     </div>
+                    <img src="kandy.png" alt="Kandy Elephants" class="tour-img">
                     <div class="tour-content">
                         <span class="tour-meta">6 Days, 5 Nights</span>
-                        <h3>Nature & Scenic Wonders</h3>
+                        <h3>Nature & Scenic Wonders of Sri Lanka</h3>
                         <ul class="tour-facilities">
-                            <li>Premium Boutique Hotels</li>
-                            <li>Private Jeep Safaris included</li>
-                            <li>Scenic First-Class Train Journey</li>
+                            <li>4-Star Accommodation</li>
+                            <li>Daily Breakfast</li>
+                            <li>Private Safari and Nature Tours</li>
+                            <li>Picnic Lunches Included</li>
                         </ul>
                     </div>
                 </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <h2 class="section-title">Visualise Your Next Holiday</h2>
+        <div class="image-grid">
+            <div class="grid-item"><img src="gallery1.jpg" alt="Gallery"></div>
+            <div class="grid-item"><img src="gallery2.jpg" alt="Gallery"></div>
+            <div class="grid-item"><img src="gallery3.jpg" alt="Gallery"></div>
+            <div class="grid-item"><img src="gallery4.jpg" alt="Gallery"></div>
+            <div class="grid-item"><img src="sigiriya.png" alt="Gallery"></div>
+            <div class="grid-item"><img src="trincomalee.png" alt="Gallery"></div>
+            <div class="grid-item"><img src="Spritual.png" alt="Gallery"></div>
+            <div class="grid-item"><img src="hero-banner.jpg" alt="Gallery"></div>
+        </div>
+    </section>
+
+    <!-- --- NEW CONTACT SECTION WITH FORM --- -->
+    <section id="contact" class="contact-section">
+        <div class="contact-wrapper">
+            <!-- Left Side: Contact Info -->
+            <div class="contact-info">
+                <h2>Get In Touch</h2>
+                <p>Ready to plan your perfect getaway? Reach out to Rajesh and our expert team today.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-user"></i>
+                        <span>Rajesh</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <span><a href="tel:76080814755">+91 76080814755</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span><a href="mailto:raj@holidaybees.in">raj@holidaybees.in</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Flat 302 Vinayknagar, Peerzadiguda, Hyderabad 500092</span>
+                    </div>
+                </div>
+                
+                <!-- Social Links in Contact Area -->
+                 <div style="margin-top: 30px;">
+                    <a href="https://wa.me/9176080814755?text=Hi%20Rajesh%2C%20I%27m%20interested%20in%20booking%20a%20holiday%20via%20HolidayBees.in" target="_blank" class="social-icon wa-footer"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                 </div>
+
+            </div>
+
+            <!-- Right Side: Contact Form -->
+            <div class="contact-form-box">
+                <h3>Send us a Message</h3>
+                <!-- Form action is set to mailto: as a fallback for no-backend sites -->
+                <form action="mailto:raj@holidaybees.in" method="post" enctype="text/plain">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="phone" placeholder="Your Phone Number" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Tell us about your travel plans..." class="form-input" required></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-social">
+             <!-- Duplicate links for footer area -->
+            <a href="https://wa.me/9176080814755?text=Hi%20Rajesh%2C%20I%27m%20interested%20in%20booking%20a%20holiday%20via%20HolidayBees.in" target="_blank" class="social-icon wa-footer"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>© 2023 Holiday Bees.in. All rights reserved.</p>
+    </footer>
+
+    <!-- Floating WhatsApp Button (Bottom Right) -->
+    <a href="https://wa.me/9176080814755?text=Hi%20Rajesh%2C%20I%27m%20interested%20in%20booking%20a%20holiday%20via%20HolidayBees.in" target="_blank" class="floating-wa">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>
