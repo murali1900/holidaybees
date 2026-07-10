@@ -27,7 +27,7 @@
             --whatsapp-green: #25D366;
         }
 
-        /* Premium Gradient Text (Used elsewhere) */
+        /* Premium Gradient Text */
         .text-gradient {
             background: linear-gradient(to right, var(--primary), #ffd700);
             -webkit-background-clip: text;
@@ -38,72 +38,17 @@
         /* Glassmorphism Navigation */
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 0.8rem 5%; position: fixed; width: 100%; top: 0; z-index: 100;
-            background: rgba(10, 17, 31, 0.8); /* Slightly darker for logo contrast */
-            backdrop-filter: blur(10px);
+            padding: 1rem 5%; position: fixed; width: 100%; top: 0; z-index: 100;
+            background: rgba(10, 17, 31, 0.7); /* Semi-transparent dark */
+            backdrop-filter: blur(10px); /* The Frosted Glass Effect */
             border-bottom: 1px solid rgba(255,255,255,0.1);
             transition: all 0.4s ease;
         }
-        nav.scrolled { padding: 0.6rem 5%; background: rgba(10, 17, 31, 0.98); }
+        /* Nav shrinks slightly on scroll */
+        nav.scrolled { padding: 0.8rem 5%; background: rgba(10, 17, 31, 0.95); }
 
-        /* --- NEW PREMIUM LOGO STYLES --- */
-        
-        /* 1. The Container and Entrance Animation */
-        .logo-container {
-            display: block;
-            max-width: 200px; /* Adjust width to fit navbar */
-            position: relative;
-            overflow: hidden; /* Needed for the shine effect */
-            border-radius: 8px; /* Smooth corners for the image */
-            /* The entrance animation */
-            animation: slideDownFade 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-        }
-
-        .main-logo {
-            width: 100%;
-            height: auto;
-            display: block;
-            /* Since the logo has a white background, adding a slight glow helps it sit on the dark nav */
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-             border-radius: 8px;
-        }
-
-        /* Keyframes for entrance */
-        @keyframes slideDownFade {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* 2. The "Shine" Hover Effect */
-        /* This creates an invisible layer that sweeps across on hover */
-        .logo-container::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -60%;
-            width: 20%;
-            height: 200%;
-            opacity: 0;
-            transform: rotate(30deg);
-            /* The shine gradient */
-            background: linear-gradient(to right, rgba(255, 255, 255, 0.0) 0%, rgba(255, 255, 255, 0.6) 77%, rgba(255, 255, 255, 0.8) 92%, rgba(255, 255, 255, 0.0) 100%);
-            transition: opacity 0.3ss;
-        }
-
-        /* Trigger the shine on hover */
-        .logo-container:hover::after {
-            opacity: 1;
-            animation: shineSlide 1.8s ease-in-out infinite; /* Loops infinitely on hover */
-        }
-
-        @keyframes shineSlide {
-            from { left: -60%; }
-            to { left: 120%; }
-        }
-
-        /* --- END NEW LOGO STYLES --- */
-
-
+        .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary); letter-spacing: 1px; }
+        .logo span { color: var(--light); }
         .nav-contact-btn { background: linear-gradient(45deg, var(--primary), var(--primary-dark)); color: var(--dark); padding: 10px 30px; font-weight: 700; border-radius: 30px; box-shadow: 0 4px 15px rgba(252, 163, 17, 0.3); }
         .nav-contact-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(252, 163, 17, 0.5); color: white;}
 
@@ -114,6 +59,7 @@
             text-align: center; color: var(--light); padding: 0 20px;
             background-size: cover; background-position: center;
         }
+        /* Dark Overlay on slides so text is readable */
         .slide-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(10, 17, 31, 0.5), rgba(10, 17, 31, 0.7));
@@ -124,6 +70,7 @@
         .hero h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 1.5rem; font-weight: 800; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
         .hero p { font-size: 1.3rem; font-weight: 300; margin-bottom: 2.5rem; letter-spacing: 1px; rgba(255,255,255,0.9); }
         
+        /* Premium Button Style */
         .main-btn {
             padding: 18px 45px; background: linear-gradient(45deg, var(--primary), var(--primary-dark));
             color: var(--dark); font-size: 1rem; font-weight: 700; border-radius: 50px;
@@ -142,7 +89,7 @@
         .section-title { font-size: 3rem; margin-bottom: 1rem; color: var(--dark); text-align: center; font-weight: 700; }
         .section-subtitle { text-align: center; margin-bottom: 4rem; color: #666; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;}
 
-        /* Tours Cards */
+        /* Tours Cards with hover lift */
         .tours-section { background: white; }
         .tour-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
         .tour-card-link { color: inherit; display: block; height: 100%; }
@@ -161,26 +108,38 @@
         .tour-facilities li::before { content: '✦'; color: var(--primary); position: absolute; left: 0; top: 2px; }
 
         /* --- NEW MID-BANNER PARALLAX SECTION --- */
+        /* This creates the "floating background" effect */
         .parallax-banner {
+            /* Using one of your gallery images for the parallax background */
             background-image: linear-gradient(rgba(10, 17, 31, 0.6), rgba(10, 17, 31, 0.6)), url('gallery2.jpg');
-            background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover;
-            padding: 10rem 5%; text-align: center; color: white;
+            /* This is the key line for the effect */
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 10rem 5%;
+            text-align: center;
+            color: white;
         }
         .parallax-banner h2 { font-size: 3.5rem; margin-bottom: 2rem;}
 
 
-        /* Gallery */
+        /* Gallery with premium hover */
         .gallery-section { text-align: center; background: #f4f4f4; }
         .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
         .grid-item { height: 280px; border-radius: 15px; overflow: hidden; position: relative; box-shadow: 0 10px 20px rgba(0,0,0,0.08); cursor: pointer;}
         .grid-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        /* Dark gradient overlay on hover */
         .grid-item::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(10, 17, 31, 0.8), transparent); opacity: 0; transition: opacity 0.4s ease; }
         .grid-item:hover img { transform: scale(1.15); }
         .grid-item:hover::after { opacity: 1; }
 
+
         /* Contact Section & Form */
         .contact-section { background-color: var(--dark); color: var(--light); position: relative; overflow: hidden;}
+        /* Subtle background pattern */
         .contact-section::before { content: ''; position: absolute; top:0; left:0; width: 100%; height: 100%; opacity: 0.05; background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); pointer-events: none;}
+        
         .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; max-width: 1100px; margin: 0 auto; position: relative; z-index: 2;}
         .contact-info h2 { color: var(--light); margin-bottom: 1.5rem; font-size: 3rem; }
         .contact-details { margin-top: 3rem; }
@@ -210,25 +169,20 @@
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 3rem; }
-            /* Adjust logo size for mobile */
-            .logo-container { max-width: 150px; }
+            .logo { font-size: 1.5rem; }
             .nav-contact-btn { display: none; }
             .contact-wrapper { grid-template-columns: 1fr; gap: 3rem; }
             .contact-form-box { padding: 2rem; }
             .floating-wa { bottom: 20px; right: 20px; width: 60px; height: 60px; font-size: 30px; }
-            .parallax-banner { background-attachment: scroll; }
+            .parallax-banner { background-attachment: scroll; /* Parallax doesn't work well on mobile, so we disable it there */ }
         }
     </style>
 </head>
 <body>
 
-    <!-- Glassmorphism Navigation with PREMIUM LOGO -->
+    <!-- Glassmorphism Navigation -->
     <nav id="navbar">
-        <!-- The new logo container with animation classes -->
-        <a href="#" class="logo-container">
-            <!-- Make sure your image is named exactly logo.png and is in the folder -->
-            <img src="logo.png" alt="Holiday Bees Premium Logo" class="main-logo">
-        </a>
+        <div class="logo">Holiday<span class="text-gradient">Bees</span>.in</div>
         <a href="#contact" class="nav-contact-btn">Plan My Trip</a>
     </nav>
 
@@ -236,14 +190,17 @@
     <div class="hero-slider">
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
+                <!-- Slide 1 (Using hero-banner.jpg) -->
                 <div class="swiper-slide" style="background-image: url('hero-banner.jpg');">
                     <div class="slide-overlay"></div>
+                    <!-- data-aos attribute adds the scroll animation -->
                     <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
                         <h1>Your Gateway to<br><span class="text-gradient">Exotic Getaways</span></h1>
                         <p>Sister concern of Sri Lanka's premier DMC. Bringing world-class expertise to your dream holidays.</p>
                         <a href="#packages" class="main-btn">Explore Experiences</a>
                     </div>
                 </div>
+                <!-- Slide 2 (Using gallery2.jpg for variety) -->
                  <div class="swiper-slide" style="background-image: url('gallery2.jpg');">
                     <div class="slide-overlay"></div>
                     <div class="hero-content">
@@ -252,6 +209,7 @@
                         <a href="#packages" class="main-btn">View Cultural Tours</a>
                     </div>
                 </div>
+                 <!-- Slide 3 (Using gallery3.jpg for variety) -->
                  <div class="swiper-slide" style="background-image: url('gallery3.jpg');">
                     <div class="slide-overlay"></div>
                     <div class="hero-content">
@@ -267,7 +225,7 @@
         </div>
     </div>
 
-    <!-- Tours Section -->
+    <!-- Tours Section with fade-up animations -->
     <section id="packages" class="tours-section">
         <h2 class="section-title" data-aos="fade-up">Featured Sri Lanka Experiences</h2>
         <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Handpicked itineraries for an unforgettable journey, crafted with precision and care.</p>
@@ -310,7 +268,7 @@
         </div>
     </section>
 
-    <!-- MID-BANNER PARALLAX SECTION -->
+    <!-- NEW: MID-BANNER PARALLAX SECTION ("Floating Background") -->
     <section class="parallax-banner" data-aos="fade">
         <h2 data-aos="zoom-in" data-aos-delay="200">Not Just a Holiday. <br><span class="text-gradient">An Experience.</span></h2>
         <p data-aos="fade-up" data-aos-delay="400" style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem auto;">We craft bespoke journeys that go beyond the ordinary.</p>
@@ -318,11 +276,12 @@
     </section>
 
 
-    <!-- Gallery Section -->
+    <!-- Gallery Section with stagger animation -->
     <section class="gallery-section">
         <h2 class="section-title" data-aos="fade-up">Visualise Your Next Escape</h2>
         <p class="section-subtitle" data-aos="fade-up">A glimpse into the destinations waiting for you.</p>
         <div class="image-grid">
+            <!-- Adding data-aos-delay creates a cascading effect -->
             <div class="grid-item" data-aos="fade-up" data-aos-delay="100"><img src="gallery1.jpg" alt="Gallery"></div>
             <div class="grid-item" data-aos="fade-up" data-aos-delay="150"><img src="gallery2.jpg" alt="Gallery"></div>
             <div class="grid-item" data-aos="fade-up" data-aos-delay="200"><img src="gallery3.jpg" alt="Gallery"></div>
@@ -414,20 +373,43 @@
     
     <!-- Initialization Script -->
     <script>
-        AOS.init({ offset: 100, duration: 800, easing: 'ease-in-out', once: true, });
-
-        var swiper = new Swiper(".mySwiper", {
-            spaceBetween: 0, centeredSlides: true, speed: 1000,
-            autoplay: { delay: 5000, disableOnInteraction: false, },
-            pagination: { el: ".swiper-pagination", clickable: true, },
-            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev", },
-             effect: 'fade', fadeEffect: { crossFade: true }
+        // 1. Initialize Scroll Animations (AOS)
+        AOS.init({
+            offset: 100, // offset (in px) from the original trigger point
+            duration: 800, // values from 0 to 3000, with step 50ms
+            easing: 'ease-in-out', // default easing for AOS animations
+            once: true, // whether animation should happen only once - while scrolling down
         });
 
+        // 2. Initialize Hero Slider (Swiper)
+        var swiper = new Swiper(".mySwiper", {
+            spaceBetween: 0,
+            centeredSlides: true,
+            speed: 1000,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+             effect: 'fade', // Fades between slides instead of sliding
+             fadeEffect: { crossFade: true }
+        });
+
+        // 3. Navbar darker on scroll
         window.addEventListener('scroll', function() {
             const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) { nav.classList.add('scrolled'); }
-            else { nav.classList.remove('scrolled'); }
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
         });
     </script>
 
