@@ -27,7 +27,6 @@
             --whatsapp-green: #25D366;
         }
 
-        /* Premium Gradient Text */
         .text-gradient {
             background: linear-gradient(to right, var(--primary), #ffd700);
             -webkit-background-clip: text;
@@ -38,39 +37,73 @@
         /* Glassmorphism Navigation */
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 1rem 5%; position: fixed; width: 100%; top: 0; z-index: 100;
-            background: rgba(10, 17, 31, 0.7); /* Semi-transparent dark */
-            backdrop-filter: blur(10px); /* The Frosted Glass Effect */
+            /* Reduced padding for sleeker look */
+            padding: 0.5rem 5%; position: fixed; width: 100%; top: 0; z-index: 100;
+            background: rgba(10, 17, 31, 0.85);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255,255,255,0.1);
             transition: all 0.4s ease;
+            height: 80px; /* Fixed height to ensure alignment */
         }
-        /* Nav shrinks slightly on scroll */
-        nav.scrolled { padding: 0.8rem 5%; background: rgba(10, 17, 31, 0.95); }
+        nav.scrolled { background: rgba(10, 17, 31, 0.98); }
 
-        .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary); letter-spacing: 1px; }
-        .logo span { color: var(--light); }
+        /* --- LOGO STYLES --- */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            max-width: 180px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            animation: slideDownFade 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .main-logo {
+            max-height: 60px; /* Ensure logo doesn't overflow nav height */
+            width: auto;
+            display: block;
+            /* Fallback style if image is missing */
+            font-weight: 800; color: var(--primary); font-size: 1.5rem;
+        }
+
+        @keyframes slideDownFade {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-container::after {
+            content: ''; position: absolute; top: -50%; left: -60%; width: 20%; height: 200%; opacity: 0; transform: rotate(30deg);
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.0) 0%, rgba(255, 255, 255, 0.6) 77%, rgba(255, 255, 255, 0.8) 92%, rgba(255, 255, 255, 0.0) 100%);
+            transition: opacity 0.3s;
+        }
+        .logo-container:hover::after { opacity: 1; animation: shineSlide 1.8s ease-in-out infinite; }
+        @keyframes shineSlide { from { left: -60%; } to { left: 120%; } }
+
         .nav-contact-btn { background: linear-gradient(45deg, var(--primary), var(--primary-dark)); color: var(--dark); padding: 10px 30px; font-weight: 700; border-radius: 30px; box-shadow: 0 4px 15px rgba(252, 163, 17, 0.3); }
         .nav-contact-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(252, 163, 17, 0.5); color: white;}
 
         /* --- HERO SLIDER SECTION (Swiper.js) --- */
-        .hero-slider { height: 100vh; width: 100%; position: relative; }
+        /* Changed height from 100vh to a fixed height for better mobile consistency */
+        .hero-slider { height: 90vh; min-height: 600px; width: 100%; position: relative; }
         .swiper-slide {
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; color: var(--light); padding: 0 20px;
+            text-align: center; color: var(--light); 
+            /* Added top padding so content clears the navbar */
+            padding: 100px 20px 0 20px;
             background-size: cover; background-position: center;
         }
-        /* Dark Overlay on slides so text is readable */
         .slide-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(10, 17, 31, 0.5), rgba(10, 17, 31, 0.7));
+            background: linear-gradient(rgba(10, 17, 31, 0.4), rgba(10, 17, 31, 0.6)); /* Lighter overlay */
             z-index: 1;
         }
-        .hero-content { position: relative; z-index: 2; max-width: 900px; margin-top: 60px;}
+        /* Removed margin-top here as we use padding on the slide now */
+        .hero-content { position: relative; z-index: 2; max-width: 900px; }
         
-        .hero h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 1.5rem; font-weight: 800; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        .hero h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; font-weight: 800; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
         .hero p { font-size: 1.3rem; font-weight: 300; margin-bottom: 2.5rem; letter-spacing: 1px; rgba(255,255,255,0.9); }
         
-        /* Premium Button Style */
         .main-btn {
             padding: 18px 45px; background: linear-gradient(45deg, var(--primary), var(--primary-dark));
             color: var(--dark); font-size: 1rem; font-weight: 700; border-radius: 50px;
@@ -78,18 +111,17 @@
         }
         .main-btn:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(252, 163, 17, 0.6); color: white; }
 
-        /* Slider Navigation Styles */
-        .swiper-button-next, .swiper-button-prev { color: var(--primary) !important; opacity: 0.7; transition: opacity 0.3s; }
-        .swiper-button-next:hover, .swiper-button-prev:hover { opacity: 1; }
+        .swiper-button-next, .swiper-button-prev { color: var(--primary) !important; }
         .swiper-pagination-bullet-active { background: var(--primary) !important; }
 
 
-        /* --- SECTIONS --- */
-        section { padding: 7rem 5%; }
-        .section-title { font-size: 3rem; margin-bottom: 1rem; color: var(--dark); text-align: center; font-weight: 700; }
-        .section-subtitle { text-align: center; margin-bottom: 4rem; color: #666; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;}
+        /* --- SECTIONS SPACING FIX --- */
+        /* Reduced padding significantly to remove empty space */
+        section { padding: 4rem 5%; }
+        .section-title { font-size: 2.8rem; margin-bottom: 1rem; color: var(--dark); text-align: center; font-weight: 700; }
+        .section-subtitle { text-align: center; margin-bottom: 3rem; color: #666; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;}
 
-        /* Tours Cards with hover lift */
+        /* Tours Cards */
         .tours-section { background: white; }
         .tour-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
         .tour-card-link { color: inherit; display: block; height: 100%; }
@@ -97,92 +129,85 @@
             background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05);
             box-shadow: 0 15px 30px rgba(0,0,0,0.05); transition: all 0.4s ease; height: 100%; display: flex; flex-direction: column;
         }
-        .tour-card:hover { transform: translateY(-15px); box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
-        .tour-img-wrap { overflow: hidden; height: 280px; }
+        .tour-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
+        .tour-img-wrap { overflow: hidden; height: 250px; }
         .tour-img { height: 100%; width: 100%; object-fit: cover; transition: transform 0.5s ease; }
-        .tour-card:hover .tour-img { transform: scale(1.1); }
-        .tour-content { padding: 2.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .tour-card:hover .tour-img { transform: scale(1.05); }
+        .tour-content { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; }
         .tour-meta { color: var(--primary); font-weight: 700; letter-spacing: 1px; font-size: 0.9rem; margin-bottom: 15px; display: block; text-transform: uppercase;}
-        .tour-card h3 { font-size: 1.6rem; margin-bottom: 1.5rem; line-height: 1.3; }
+        .tour-card h3 { font-size: 1.5rem; margin-bottom: 1.5rem; line-height: 1.3; }
         .tour-facilities li { font-size: 1rem; color: #555; margin-bottom: 10px; padding-left: 25px; position: relative; }
         .tour-facilities li::before { content: '✦'; color: var(--primary); position: absolute; left: 0; top: 2px; }
 
-        /* --- NEW MID-BANNER PARALLAX SECTION --- */
-        /* This creates the "floating background" effect */
+        /* --- MID-BANNER PARALLAX SECTION --- */
         .parallax-banner {
-            /* Using one of your gallery images for the parallax background */
             background-image: linear-gradient(rgba(10, 17, 31, 0.6), rgba(10, 17, 31, 0.6)), url('gallery2.jpg');
-            /* This is the key line for the effect */
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            padding: 10rem 5%;
-            text-align: center;
-            color: white;
+            background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover;
+            padding: 8rem 5%; text-align: center; color: white; /* Reduced padding here too */
         }
-        .parallax-banner h2 { font-size: 3.5rem; margin-bottom: 2rem;}
+        .parallax-banner h2 { font-size: 3rem; margin-bottom: 1.5rem;}
 
 
-        /* Gallery with premium hover */
+        /* Gallery */
         .gallery-section { text-align: center; background: #f4f4f4; }
-        .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .grid-item { height: 280px; border-radius: 15px; overflow: hidden; position: relative; box-shadow: 0 10px 20px rgba(0,0,0,0.08); cursor: pointer;}
+        .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        .grid-item { height: 250px; border-radius: 15px; overflow: hidden; position: relative; box-shadow: 0 10px 20px rgba(0,0,0,0.08); cursor: pointer;}
         .grid-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); }
-        /* Dark gradient overlay on hover */
         .grid-item::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(10, 17, 31, 0.8), transparent); opacity: 0; transition: opacity 0.4s ease; }
         .grid-item:hover img { transform: scale(1.15); }
         .grid-item:hover::after { opacity: 1; }
 
-
         /* Contact Section & Form */
         .contact-section { background-color: var(--dark); color: var(--light); position: relative; overflow: hidden;}
-        /* Subtle background pattern */
         .contact-section::before { content: ''; position: absolute; top:0; left:0; width: 100%; height: 100%; opacity: 0.05; background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); pointer-events: none;}
-        
-        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; max-width: 1100px; margin: 0 auto; position: relative; z-index: 2;}
-        .contact-info h2 { color: var(--light); margin-bottom: 1.5rem; font-size: 3rem; }
-        .contact-details { margin-top: 3rem; }
-        .contact-item { margin-bottom: 2rem; display: flex; align-items: center; }
-        .icon-box { display: flex; justify-content: center; align-items: center; width: 60px; height: 60px; background: rgba(252, 163, 17, 0.1); color: var(--primary); border-radius: 50%; margin-right: 20px; font-size: 1.5rem;}
-        .contact-item a { color: rgba(255,255,255,0.8); font-size: 1.1rem;}
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1100px; margin: 0 auto; position: relative; z-index: 2;}
+        .contact-info h2 { color: var(--light); margin-bottom: 1rem; font-size: 2.8rem; }
+        .contact-details { margin-top: 2rem; }
+        .contact-item { margin-bottom: 1.5rem; display: flex; align-items: center; }
+        .icon-box { display: flex; justify-content: center; align-items: center; width: 50px; height: 50px; background: rgba(252, 163, 17, 0.1); color: var(--primary); border-radius: 50%; margin-right: 20px; font-size: 1.3rem;}
+        .contact-item a { color: rgba(255,255,255,0.8); font-size: 1rem;}
         .contact-item a:hover { color: var(--primary); }
 
-        .contact-form-box { background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); padding: 3rem; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1); }
-        .form-input { width: 100%; padding: 15px 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); border-radius: 10px; font-family: inherit; font-size: 1rem; color: white; margin-bottom: 1.5rem; transition: border 0.3s;}
+        .contact-form-box { background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); padding: 2.5rem; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1); }
+        .form-input { width: 100%; padding: 12px 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); border-radius: 10px; font-family: inherit; font-size: 1rem; color: white; margin-bottom: 1rem; transition: border 0.3s;}
         .form-input:focus { outline: none; border-color: var(--primary); }
         .form-input::placeholder { color: rgba(255,255,255,0.4); }
-        textarea.form-input { resize: vertical; height: 150px; }
-        .form-submit { width: 100%; padding: 15px; background: linear-gradient(45deg, var(--primary), var(--primary-dark)); color: var(--dark); border: none; border-radius: 10px; font-weight: 700; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease; letter-spacing: 1px;}
+        textarea.form-input { resize: vertical; height: 120px; }
+        .form-submit { width: 100%; padding: 15px; background: linear-gradient(45deg, var(--primary), var(--primary-dark)); color: var(--dark); border: none; border-radius: 10px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; letter-spacing: 1px;}
         .form-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(252, 163, 17, 0.4); color: white; }
 
         /* Footer & Social */
-        footer { background: #050911; color: rgba(255,255,255,0.5); text-align: center; padding: 4rem 2rem; }
-        .footer-social { margin-bottom: 2rem; }
-        .social-icon { display: inline-flex; justify-content: center; align-items: center; width: 55px; height: 55px; background: rgba(255,255,255,0.05); color: var(--light); border-radius: 50%; margin: 0 10px; font-size: 1.5rem; transition: all 0.3s ease; }
+        footer { background: #050911; color: rgba(255,255,255,0.5); text-align: center; padding: 3rem 2rem; }
+        .footer-social { margin-bottom: 1.5rem; }
+        .social-icon { display: inline-flex; justify-content: center; align-items: center; width: 50px; height: 50px; background: rgba(255,255,255,0.05); color: var(--light); border-radius: 50%; margin: 0 10px; font-size: 1.3rem; transition: all 0.3s ease; }
         .social-icon:hover { background: var(--primary); color: var(--dark); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(252, 163, 17, 0.3); }
         .social-icon.wa-footer:hover { background: var(--whatsapp-green); color: white; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
 
         /* Floating WhatsApp */
-        .floating-wa { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(45deg, #25D366, #128C7E); color: white; width: 70px; height: 70px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 35px; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5); z-index: 100; transition: all 0.3s ease; }
+        .floating-wa { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(45deg, #25D366, #128C7E); color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 32px; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5); z-index: 100; transition: all 0.3s ease; }
         .floating-wa:hover { transform: scale(1.1) rotate(10deg); }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
-            .logo { font-size: 1.5rem; }
+            .hero h1 { font-size: 2.8rem; }
+            .logo-container { max-width: 140px; }
             .nav-contact-btn { display: none; }
             .contact-wrapper { grid-template-columns: 1fr; gap: 3rem; }
             .contact-form-box { padding: 2rem; }
-            .floating-wa { bottom: 20px; right: 20px; width: 60px; height: 60px; font-size: 30px; }
-            .parallax-banner { background-attachment: scroll; /* Parallax doesn't work well on mobile, so we disable it there */ }
+            .floating-wa { bottom: 20px; right: 20px; width: 55px; height: 55px; font-size: 28px; }
+            .parallax-banner { background-attachment: scroll; padding: 5rem 5%; }
+            section { padding: 4rem 5%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Glassmorphism Navigation -->
+    <!-- Glassmorphism Navigation with PREMIUM LOGO -->
     <nav id="navbar">
-        <div class="logo">Holiday<span class="text-gradient">Bees</span>.in</div>
+        <a href="#" class="logo-container">
+            <!-- Make sure your image is named exactly logo.png and is in the folder -->
+            <!-- Added an onerror fallback just in case -->
+            <img src="logo.png" alt="Holiday Bees" class="main-logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<h2 style=\'color:#fca311; font-weight:800;\'>HolidayBees</h2>'">
+        </a>
         <a href="#contact" class="nav-contact-btn">Plan My Trip</a>
     </nav>
 
@@ -190,17 +215,14 @@
     <div class="hero-slider">
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-                <!-- Slide 1 (Using hero-banner.jpg) -->
                 <div class="swiper-slide" style="background-image: url('hero-banner.jpg');">
                     <div class="slide-overlay"></div>
-                    <!-- data-aos attribute adds the scroll animation -->
                     <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
                         <h1>Your Gateway to<br><span class="text-gradient">Exotic Getaways</span></h1>
                         <p>Sister concern of Sri Lanka's premier DMC. Bringing world-class expertise to your dream holidays.</p>
                         <a href="#packages" class="main-btn">Explore Experiences</a>
                     </div>
                 </div>
-                <!-- Slide 2 (Using gallery2.jpg for variety) -->
                  <div class="swiper-slide" style="background-image: url('gallery2.jpg');">
                     <div class="slide-overlay"></div>
                     <div class="hero-content">
@@ -209,7 +231,6 @@
                         <a href="#packages" class="main-btn">View Cultural Tours</a>
                     </div>
                 </div>
-                 <!-- Slide 3 (Using gallery3.jpg for variety) -->
                  <div class="swiper-slide" style="background-image: url('gallery3.jpg');">
                     <div class="slide-overlay"></div>
                     <div class="hero-content">
@@ -225,7 +246,7 @@
         </div>
     </div>
 
-    <!-- Tours Section with fade-up animations -->
+    <!-- Tours Section -->
     <section id="packages" class="tours-section">
         <h2 class="section-title" data-aos="fade-up">Featured Sri Lanka Experiences</h2>
         <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Handpicked itineraries for an unforgettable journey, crafted with precision and care.</p>
@@ -264,154 +285,3 @@
                         </ul>
                     </div>
                 </div>
-            </a>
-        </div>
-    </section>
-
-    <!-- NEW: MID-BANNER PARALLAX SECTION ("Floating Background") -->
-    <section class="parallax-banner" data-aos="fade">
-        <h2 data-aos="zoom-in" data-aos-delay="200">Not Just a Holiday. <br><span class="text-gradient">An Experience.</span></h2>
-        <p data-aos="fade-up" data-aos-delay="400" style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem auto;">We craft bespoke journeys that go beyond the ordinary.</p>
-        <a href="#contact" class="main-btn" data-aos="fade-up" data-aos-delay="600">Start Planning</a>
-    </section>
-
-
-    <!-- Gallery Section with stagger animation -->
-    <section class="gallery-section">
-        <h2 class="section-title" data-aos="fade-up">Visualise Your Next Escape</h2>
-        <p class="section-subtitle" data-aos="fade-up">A glimpse into the destinations waiting for you.</p>
-        <div class="image-grid">
-            <!-- Adding data-aos-delay creates a cascading effect -->
-            <div class="grid-item" data-aos="fade-up" data-aos-delay="100"><img src="gallery1.jpg" alt="Gallery"></div>
-            <div class="grid-item" data-aos="fade-up" data-aos-delay="150"><img src="gallery2.jpg" alt="Gallery"></div>
-            <div class="grid-item" data-aos="fade-up" data-aos-delay="200"><img src="gallery3.jpg" alt="Gallery"></div>
-            <div class="grid-item" data-aos="fade-up" data-aos-delay="250"><img src="gallery4.jpg" alt="Gallery"></div>
-            <div class="grid-item" data-aos="fade-up" data-aos-delay="300"><img src="sigiriya.png" alt="Gallery"></div>
-            <div class="grid-item" data-aos="fade-up" data-aos-delay="350"><img src="trincomalee.png" alt="Gallery"></div>
-            <div class="grid-item" data-aos="fade-up" data-aos-delay="400"><img src="Spritual.png" alt="Gallery"></div>
-            <div class="grid-item" data-aos="fade-up" data-aos-delay="450"><img src="hero-banner.jpg" alt="Gallery"></div>
-        </div>
-    </section>
-
-    <!-- Premium Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="contact-wrapper">
-            <!-- Left Side: Contact Info -->
-            <div class="contact-info" data-aos="fade-right">
-                <h2>Let's Craft Your <span class="text-gradient">Perfect Itinerary</span></h2>
-                <p style="font-size: 1.2rem; opacity: 0.8;">Reach out to Rajesh and our expert specialist team to begin your journey.</p>
-                
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <div class="icon-box"><i class="fas fa-user"></i></div>
-                        <div>
-                            <h4 style="color:var(--primary); margin-bottom: 5px;">Travel Specialist</h4>
-                            <span>Rajesh</span>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                         <div class="icon-box"><i class="fas fa-phone-alt"></i></div>
-                         <div>
-                            <h4 style="color:var(--primary); margin-bottom: 5px;">Call Us</h4>
-                            <span><a href="tel:76080814755">+91 76080814755</a></span>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                         <div class="icon-box"><i class="fas fa-envelope"></i></div>
-                         <div>
-                            <h4 style="color:var(--primary); margin-bottom: 5px;">Email Us</h4>
-                            <span><a href="mailto:raj@holidaybees.in">raj@holidaybees.in</a></span>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
-                        <div>
-                             <h4 style="color:var(--primary); margin-bottom: 5px;">Visit Us</h4>
-                             <span style="color: rgba(255,255,255,0.8);">Flat 302 Vinayknagar, Peerzadiguda, Hyderabad 500092</span>
-                        </div>
-                    </div>
-                </div>
-                 <div style="margin-top: 40px;">
-                    <a href="https://wa.me/9176080814755" target="_blank" class="social-icon wa-footer"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                 </div>
-            </div>
-
-            <!-- Right Side: Glassmorphism Form -->
-            <div class="contact-form-box" data-aos="fade-left" data-aos-delay="200">
-                <h3 style="color: var(--light); margin-bottom: 2rem; font-size: 1.8rem;">Send us a Message</h3>
-                <form action="mailto:raj@holidaybees.in" method="post" enctype="text/plain">
-                    <div><input type="text" name="name" placeholder="Your Name" class="form-input" required></div>
-                    <div><input type="email" name="email" placeholder="Your Email Address" class="form-input" required></div>
-                    <div><input type="tel" name="phone" placeholder="Your Phone Number" class="form-input"></div>
-                    <div><textarea name="message" placeholder="Tell us about your dream trip..." class="form-input" required></textarea></div>
-                    <button type="submit" class="form-submit">Send Inquiry Now</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-social">
-            <a href="https://wa.me/9176080814755" target="_blank" class="social-icon wa-footer"><i class="fab fa-whatsapp"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-        </div>
-        <p>© 2023 Holiday Bees.in. All rights reserved. | Premium Destination Management</p>
-    </footer>
-
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/9176080814755?text=Hi%20Rajesh%2C%20I%27m%20interested%20in%20planning%20a%20premium%20holiday." target="_blank" class="floating-wa">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-
-    <!-- JS Libraries for Slider and Animations -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
-    <!-- Initialization Script -->
-    <script>
-        // 1. Initialize Scroll Animations (AOS)
-        AOS.init({
-            offset: 100, // offset (in px) from the original trigger point
-            duration: 800, // values from 0 to 3000, with step 50ms
-            easing: 'ease-in-out', // default easing for AOS animations
-            once: true, // whether animation should happen only once - while scrolling down
-        });
-
-        // 2. Initialize Hero Slider (Swiper)
-        var swiper = new Swiper(".mySwiper", {
-            spaceBetween: 0,
-            centeredSlides: true,
-            speed: 1000,
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-             effect: 'fade', // Fades between slides instead of sliding
-             fadeEffect: { crossFade: true }
-        });
-
-        // 3. Navbar darker on scroll
-        window.addEventListener('scroll', function() {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-    </script>
-
-</body>
-</html>
