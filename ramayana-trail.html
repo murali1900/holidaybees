@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramayana Trail | Holiday Bees</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reusing basic styles for consistency */
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: #14213d; background-color: #f8f9fa; margin:0; padding:0;}
+        :root { --primary: #fca311; --dark: #14213d; }
+        
+        /* Simple detail page header */
+        .detail-header {
+            /* Using one of your gallery images for the header header */
+            background: linear-gradient(rgba(20, 33, 61, 0.7), rgba(20, 33, 61, 0.7)), url('gallery2.jpg');
+            background-size: cover; background-position: center;
+            color: white; padding: 6rem 2rem; text-align: center;
+        }
+        .detail-header h1 { font-size: 3rem; margin-bottom: 20px; }
+        .back-btn { padding: 10px 20px; background: var(--primary); color: var(--dark); text-decoration: none; border-radius: 30px; font-weight: bold; display: inline-block; margin-top: 20px;}
+        
+        .container { max-width: 900px; margin: 4rem auto; padding: 0 20px; }
+        .details-box { background: white; padding: 3rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .highlights-list { list-style: none; padding: 0; margin-top: 2rem; }
+        .highlights-list li { margin-bottom: 1rem; padding-left: 30px; position: relative; }
+        .highlights-list li::before { content: '✓'; color: var(--primary); position: absolute; left: 0; font-weight: bold;}
+        .duration-tag { background: #eef4ed; color: #005f73; padding: 5px 15px; border-radius: 20px; font-weight: 600; display: inline-block; margin-bottom: 20px;}
+    </style>
+</head>
+<body>
+    <header class="detail-header">
+        <h1>Cultural Heritage of Sri Lanka: Ramayana Trail</h1>
+        <a href="index.html" class="back-btn">← Back to Home</a>
+    </header>
+
+    <div class="container">
+        <div class="details-box">
+            <span class="duration-tag">7 Days, 6 Nights</span>
+            <h2>Package Facilities & Inclusions</h2>
+            <ul class="highlights-list">
+                <li>4-Star Accommodation</li>
+                <li>Daily Breakfast and Dinner</li>
+                <li>Complimentary 5GB Data SIM</li>
+                <li>English-Speaking Guide</li>
+                <li>All entry fees to mentioned historical sites</li>
+                <li>Luxury AC Vehicle transport</li>
+            </ul>
+             <div style="margin-top: 40px; text-align: center;">
+                 <p>Interested in this tour?</p>
+                 <a href="index.html#contact" class="back-btn" style="width: 200px;">Contact Us to Book</a>
+             </div>
+        </div>
+    </div>
+</body>
+</html>
